@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Тема приложения. Реальные цвета задаются в Compose (Material 3), поэтому важно
+         лишь базовое оформление, чтобы окно не мигало белым при старте. -->
+    <style name="Theme.AcidWallet" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">#FF10131A</item>
+        <item name="android:navigationBarColor">#FF10131A</item>
+        <item name="android:windowBackground">#FF10131A</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

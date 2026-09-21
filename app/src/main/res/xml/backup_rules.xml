@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Правила резервного копирования: исключаем базу данных из бэкапа,
+     чтобы демонстрационные данные не «приезжали» на новое устройство. -->
+<full-backup-content>
+    <exclude domain="database" path="acid_wallet.db" />
+</full-backup-content>
