@@ -1,0 +1,12 @@
+# Единые переводы строк: скрипты сборки должны быть с LF, иначе ./gradlew
+# в Linux/macOS падает с ошибкой «bad interpreter».
+* text=auto
+*.sh text eol=lf
+gradlew text eol=lf
+*.bat text eol=crlf
+
+# Бинарные файлы не трогаем
+*.jar binary
+*.zip binary
+*.png binary
+*.jks binary

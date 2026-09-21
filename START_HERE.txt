@@ -1,0 +1,46 @@
+==========================================================
+ ACID WALLET — как запустить за 4 шага
+==========================================================
+
+1. РАСПАКУЙТЕ папку проекта в простое место без пробелов и кириллицы.
+   Хорошо: C:\AndroidProjects\AcidWallet      или   ~/AndroidProjects/AcidWallet
+   Плохо:  C:\Мои документы\курсовая   (пробелы и русские буквы иногда мешают сборке)
+
+2. ОТКРОЙТЕ ANDROID STUDIO → File → Open… → выберите ПАПКУ AcidWallet
+   (именно папку, где лежит settings.gradle.kts и этот файл).
+
+3. ДОЖДИТЕСЬ GRADLE SYNC (внизу прогресс «Gradle Build Running»).
+   При первом запуске скачивается ~300–500 МБ: Gradle 8.9, Android Gradle Plugin,
+   Compose, Room, KSP. Нужен интернет.
+   • Если Studio предложит скачать SDK Platform 35 — согласитесь.
+   • Если появится предупреждение про «gradle-wrapper.jar» — просто продолжайте:
+     IDE скачает Gradle по адресу из gradle/wrapper/gradle-wrapper.properties.
+
+4. НАЖМИТЕ ▶ RUN 'app'  (или Shift+F10).
+   Устройство: эмулятор (Device Manager → Create Device → Pixel 6, API 34/35)
+   или телефон по USB с включённой отладкой. Минимальная версия — Android 8.0 (API 26).
+
+Что дальше — в README.md (подробно) и docs/ACID.md (теория ACID).
+В приложении 4 вкладки: Кошелёк (полный CRUD), Журнал, ACID (эксперименты), Демо-банк.
+
+----------------------------------------------------------
+ЕСЛИ ЧТО-ТО ПОШЛО НЕ ТАК
+
+• «SDK location not found» → File → Sync Project with Gradle Files ещё раз:
+  Studio сама создаст файл local.properties. Можно задать вручную:
+  sdk.dir=C\:\\Android\\Sdk     (в Windows обратные слэши удваиваются)
+
+• «The project is using an incompatible version of the Android Gradle plugin»
+  → у вас старый Android Studio. Вариант А: обновить Studio (проще всего).
+  Вариант Б: в файле gradle/libs.versions.toml заменить agp = "8.6.1" на 8.2.2,
+  а в app/build.gradle.kts заменить compileSdk и targetSdk на 34.
+
+• Сборка из терминала (не обязательно):
+  Linux/macOS:  ./gradlew assembleDebug
+  Windows:      gradlew.bat assembleDebug
+  APK появится в app/build/outputs/apk/debug/app-debug.apk
+  Скрипт сам найдёт Gradle (в том числе уже скачанный Android Studio) и при
+  необходимости создаст стандартный gradle-wrapper.jar.
+
+• Хочу начать с чистого листа: в приложении вкладка «Кошелёк» →
+  кнопка «Сбросить демо-данные».

@@ -10,6 +10,18 @@
 
 ---
 
+## 🚀 Быстрый старт (TL;DR)
+
+1. Распаковать архив в простую папку (без пробелов и кириллицы в пути).
+2. Android Studio → **File → Open…** → выбрать папку `AcidWallet`.
+3. Дождаться **Gradle Sync** (первый раз скачает ~300–500 МБ; если предложит
+   поставить **SDK Platform 35** — согласиться).
+4. **▶ Run 'app'**.
+
+Те же шаги коротко лежат в файле [`START_HERE.txt`](START_HERE.txt) — он рядом с проектом.
+
+---
+
 ## 1. Как открыть и запустить (Android Studio)
 
 1. **Установите Android Studio** (Ladybug 2024.2.1 или новее). JDK 17 идёт в комплекте,
@@ -20,6 +32,8 @@
    (адрес указан в `gradle/wrapper/gradle-wrapper.properties`), плагин Android Gradle Plugin,
    Compose, Room и KSP. Нужен интернет — примерно 300–500 МБ на первый раз.
    *Если Studio предложит установить SDK Platform 35 — согласитесь.*
+   Предупреждение про отсутствующий `gradle-wrapper.jar` можно игнорировать:
+   IDE берёт дистрибутив прямо из `gradle-wrapper.properties`.
 4. Подключите телефон (Android 8.0 / API 26 и выше) или создайте эмулятор
    (**Device Manager → Create Device → Pixel 6 / API 34–35**).
 5. Нажмите зелёную кнопку **▶ Run 'app'** (Shift+F10).
@@ -28,12 +42,13 @@
 три счёта (карта, копилка, наличные) и служебные счета для ACID-экспериментов.
 
 > **Про `gradlew` в этом репозитории.** Бинарный `gradle/wrapper/gradle-wrapper.jar`
-> в git не хранится (бинарники в репозиториях не нужны), поэтому рядом лежит
-> скрипт-обёртка: он либо вызывает Gradle из `PATH`, либо сам скачивает нужную версию.
-> Для Android Studio это не важно — IDE всегда скачивает дистрибутив по адресу из
-> `gradle/wrapper/gradle-wrapper.properties`.
-> Если очень нужна классическая обёртка: `gradle wrapper --gradle-version 8.9`
-> (при установленном локально Gradle).
+> в git не хранится (бинарники в репозиториях не нужны). Вместо него — самодостаточный
+> скрипт `gradlew`: он находит Java (в `PATH`, `JAVA_HOME` или во встроенном JBR
+> Android Studio), находит Gradle (в `PATH` или уже скачанный Studio в
+> `~/.gradle/wrapper/dists`), при необходимости сам создаёт стандартный
+> `gradle-wrapper.jar` (`gradle wrapper --gradle-version 8.9`), а если Gradle нет
+> вообще — скачивает дистрибутив. Для Android Studio всё это не важно: IDE берёт
+> дистрибутив прямо из `gradle/wrapper/gradle-wrapper.properties`.
 
 **Сборка из терминала** (после Gradle Sync, когда `ANDROID_HOME` настроен):
 
@@ -151,9 +166,9 @@ app/src/main/java/com/example/acidwallet/
 
 | Параметр | Значение |
 |---|---|
-| Android Studio | Ladybug (2024.2.1) или новее |
+| Android Studio | Koala Feature Drop (2024.1.2) или новее |
 | Gradle | 8.9 |
-| Android Gradle Plugin | 8.7.3 |
+| Android Gradle Plugin | 8.6.1 |
 | Kotlin | 2.0.21 (с плагином Compose Compiler) |
 | Room + KSP | 2.6.1 |
 | Compose BOM | 2024.12.01 |
@@ -161,7 +176,16 @@ app/src/main/java/com/example/acidwallet/
 | Java | 17 |
 
 Версии собраны в одном файле — `gradle/libs.versions.toml`.
-Если нужен более старый Android Studio, поменяйте `agp` и `kotlin` там же.
+
+### Если у вас старый Android Studio
+
+Studio 2023–начала 2024 года не понимает AGP 8.6. Тогда:
+
+1. откройте `gradle/libs.versions.toml` и поставьте `agp = "8.2.2"`;
+2. в `app/build.gradle.kts` поменяйте `compileSdk = 34` и `targetSdk = 34`.
+
+Такой набор работает уже в Android Studio Hedgehog (2023.1.1) и новее.
+Самый простой путь, конечно, — просто обновить Android Studio.
 
 ---
 
