@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 640" font-family="Segoe UI, Roboto, Arial, sans-serif">
+  <defs>
+    <clipPath id="screen">
+      <circle cx="280" cy="290" r="252"/>
+    </clipPath>
+    <path id="arcTop" d="M 55,290 A 225,225 0 0 1 505,290"/>
+  </defs>
+
+  <!-- фон -->
+  <rect width="560" height="640" fill="#0b0c10"/>
+
+  <!-- корпус часов -->
+  <circle cx="280" cy="290" r="272" fill="#1b1e26"/>
+  <circle cx="280" cy="290" r="272" fill="none" stroke="#2c303b" stroke-width="2"/>
+  <circle cx="280" cy="290" r="252" fill="#000000"/>
+
+  <!-- изогнутая строка времени -->
+  <text font-size="20" letter-spacing="1.5" fill="#7EC8FF" font-weight="600">
+    <textPath href="#arcTop" startOffset="50%" text-anchor="middle">СР 7 ОКТ &#183; 10:24 &#183; НЕЧЁТ</textPath>
+  </text>
+
+  <!-- контент экрана (обрезается по кругу) -->
+  <g clip-path="url(#screen)">
+
+    <!-- карточка «сейчас» -->
+    <g>
+      <rect x="110" y="115" width="340" height="84" rx="16" fill="#122033" stroke="#7EC8FF" stroke-width="2.5"/>
+      <text x="128" y="141" font-size="11" letter-spacing="2" fill="#9aa3b2">ИДЁТ СЕЙЧАС</text>
+      <text x="128" y="165" font-size="17" font-weight="700" fill="#7EC8FF">Разработка моб. приложений</text>
+      <text x="128" y="185" font-size="12.5" fill="#c7cedd">6-715 &#183; ещё 56 мин</text>
+    </g>
+
+    <!-- текущая пара (подсвечена) -->
+    <g>
+      <rect x="110" y="211" width="340" height="74" rx="16" fill="#122033" stroke="#7EC8FF" stroke-width="2.5"/>
+      <text x="128" y="238" font-size="16" font-weight="700" fill="#ffffff">10:00</text>
+      <text x="128" y="258" font-size="11" fill="#8b93a3">11:20</text>
+      <text x="196" y="240" font-size="13.5" font-weight="700" fill="#ffffff">Разработка моб. приложений</text>
+      <text x="196" y="262" font-size="11.5" fill="#a7b0c0">лек &#183; 6-715</text>
+    </g>
+
+    <!-- следующая пара -->
+    <g>
+      <rect x="110" y="297" width="340" height="74" rx="16" fill="#15181e" stroke="#2a2f3a" stroke-width="1.5"/>
+      <text x="128" y="324" font-size="16" font-weight="700" fill="#e8ebf2">11:30</text>
+      <text x="128" y="344" font-size="11" fill="#8b93a3">12:50</text>
+      <text x="196" y="326" font-size="13.5" font-weight="700" fill="#e8ebf2">Разработка моб. приложений</text>
+      <text x="196" y="348" font-size="11.5" fill="#a7b0c0">пр &#183; 6-329 &#183; 2 п/г</text>
+    </g>
+
+    <!-- пара ниже видимого центра (уходит за край) -->
+    <g opacity="0.55">
+      <rect x="110" y="383" width="340" height="74" rx="16" fill="#15181e" stroke="#2a2f3a" stroke-width="1.5"/>
+      <text x="128" y="410" font-size="16" font-weight="700" fill="#e8ebf2">13:30</text>
+      <text x="128" y="430" font-size="11" fill="#8b93a3">14:50</text>
+      <text x="196" y="412" font-size="13.5" font-weight="700" fill="#e8ebf2">Разработка моб. приложений</text>
+      <text x="196" y="434" font-size="11.5" fill="#a7b0c0">пр &#183; 6-329 &#183; 2 п/г</text>
+    </g>
+
+    <!-- индикатор прокрутки -->
+    <line x1="513" y1="250" x2="513" y2="330" stroke="#737b8c" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <!-- подписи-подсказки -->
+  <text x="280" y="600" font-size="14" fill="#9aa3b2" text-anchor="middle">свайп &#8592;&#8594; — следующий/предыдущий день&#160;&#160;&#183;&#160;&#160;скролл и безель — список пар&#160;&#160;&#183;&#160;&#160;тап — детали пары</text>
+</svg>

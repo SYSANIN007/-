@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Тема: системная тёмная тема часов, весь UI рисует Jetpack Compose -->
+    <style name="Theme.WearSchedule" parent="@android:style/Theme.DeviceDefault.NoActionBar" />
+</resources>
