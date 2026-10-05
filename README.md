@@ -122,6 +122,29 @@ app/src/main/
 Стек: Kotlin 2.0, Compose BOM 2024.09, **Wear Compose (material + foundation) 1.3.1**,
 kotlinx.serialization, Jsoup. AGP 8.5, Gradle 8.9.
 
+## 🩹 Частые проблемы (FAQ)
+
+**«Cannot find a Java installation … Compatible with Java 21 (from gradle/gradle-daemon-jvm.properties)»**
+Этот файл создаёт сама Android Studio (новые версии), проекту он не нужен:
+
+1. В дереве проекта открой папку `gradle` → удали файл `gradle-daemon-jvm.properties`.
+2. `File → Settings → Build, Execution, Deployment → Build Tools → Gradle` → поле **Gradle JVM** →
+   выбери встроенную Java студии (`jbr-17` или `jbr-21`).
+3. `File → Sync Project with Gradle Files`.
+
+Альтернатива: установить JDK 21 (например, [Eclipse Temurin](https://adoptium.net/)) и выбрать его
+в том же поле Gradle JVM. Проект работает и на Java 17, и на Java 21.
+
+**Ошибки вида `Unresolved reference 'material3'` в файлах `com.example.…`, `ui/theme/Theme.kt`**
+Это файлы другого проекта-шаблона, в которые скопирован код приложения. Так делать не нужно:
+репозиторий — уже готовый проект. Открой через `File → Open` папку **с файлом `settings.gradle.kts`**
+(корень репозитория, где лежат `app/`, `gradle/`, `README.md`), а не папку `app` и не сторонний проект.
+
+**«Could not find gradle-wrapper.jar»**
+Нормальная ситуация: бинарный jar в git не кладут. Android Studio скачает Gradle 8.9 сам
+по `gradle/wrapper/gradle-wrapper.properties`. Для запуска из терминала один раз выполни `gradle wrapper`
+или нажми **Fix Gradle wrapper** в окне ошибки.
+
 ## ⚠️ Известные ограничения
 
 - Автообновление зависит от стороннего зеркала `timetable.житков.рф`. Если оно перестанет
