@@ -11,6 +11,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.wear.compose.foundation.CurvedTextStyle
+import androidx.wear.compose.foundation.curvedText
+import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
@@ -87,7 +89,7 @@ fun ScheduleApp(
     val currentListState = listStates[currentPage]
 
     Scaffold(
-        vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottomSides) },
+        vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) },
         positionIndicator = { PositionIndicator(scalingLazyListState = currentListState) },
         timeText = {
             val date = dates[currentPage]

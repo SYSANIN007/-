@@ -33,7 +33,7 @@ fun SectionCard(
             .background(container)
             .then(
                 if (borderColor != null) {
-                    Modifier.borderlessCardBorder(borderColor)
+                    Modifier.border(1.5.dp, borderColor, RoundedCornerShape(16.dp))
                 } else {
                     Modifier
                 }

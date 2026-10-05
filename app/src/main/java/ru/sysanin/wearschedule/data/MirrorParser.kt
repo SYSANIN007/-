@@ -50,13 +50,21 @@ object MirrorParser {
         val tables = doc.select("table")
         if (tables.isEmpty()) return null
 
+        // Запасной вариант: номера недель по порядку встречания в тексте страницы
+        // (используется, если заголовок «Неделя: N-я» не является соседним элементом).
+        val docWeekNumbers = WEEK_REGEX.findAll(doc.text())
+            .mapNotNull { it.groupValues[1].toIntOrNull() }
+            .toList()
+
         val dayLessons = mutableMapOf<String, MutableList<LessonDto>>()
         val allBells = mutableListOf<BellDto>()
         var semesterStart: LocalDate? = null
         var groupTitle: String? = null
 
-        for (table in tables) {
-            val weekNumber = findWeekNumber(table) ?: continue
+        for ((tableIndex, table) in tables.withIndex()) {
+            val weekNumber = findWeekNumber(table)
+                ?: docWeekNumbers.getOrNull(tableIndex)
+                ?: continue
             val parity = if (weekNumber % 2 == 0) "even" else "odd"
             var weekMonday: LocalDate? = null
 
