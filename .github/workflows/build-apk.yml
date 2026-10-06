@@ -1,7 +1,8 @@
 name: Build APK
 
-# Сборка debug-APK в облаке GitHub — не нужна локальная Java/Android SDK.
+# Сборка debug-APK в облаке GitHub — локальная Java/Android SDK не нужны.
 # Запускается автоматически при пуше в ветку приложения и вручную (Run workflow).
+# Готовый APK публикуется в разделе Releases — можно скачать и установить на часы/эмулятор.
 on:
   push:
     branches: [arena/01a10c66-repo, main]
@@ -9,6 +10,9 @@ on:
       - '**.md'
       - 'docs/**'
   workflow_dispatch:
+
+permissions:
+  contents: write # чтобы выкладывать APK в GitHub Release
 
 jobs:
   build:
@@ -45,3 +49,17 @@ jobs:
           name: wearschedule-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
+
+      # APK подписан debug-ключом CI, поэтому отличается от локально собранного:
+      # перед установкой нужно удалить старую версию приложения.
+      - name: Publish APK to GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          SHA="$(git rev-parse --short HEAD)"
+          TAG="debug-$SHA"
+          gh release create "$TAG" app/build/outputs/apk/debug/app-debug.apk \
+            --title "WearSchedule debug $SHA" \
+            --notes "Автосборка ветки ${GITHUB_REF_NAME}. APK подписан debug-ключом CI — перед установкой удали старую версию." \
+            --target "$GITHUB_SHA" --prerelease \
+          || gh release upload "$TAG" app/build/outputs/apk/debug/app-debug.apk --clobber
