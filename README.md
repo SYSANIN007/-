@@ -143,9 +143,14 @@ Gradle-демон работает на слишком новой Java (27 — �
 1. `File → Settings → Build, Execution, Deployment → Build Tools → Gradle` → поле **Gradle JVM** →
    выбери Java **17 или 21** (например `jbr-21`). Если в списке нет — `Add JDK…` → папка
    `C:\Program Files\Android\Android Studio\jbr` либо `Download JDK…` → версия 21.
-2. В терминале студии (View → Tool Windows → Terminal) выполни `gradlew --stop` —
-   это убьёт старый демон, который всё ещё сидит на Java 27.
-3. `File → Sync Project with Gradle Files` → снова Run.
+2. `File → Sync Project with Gradle Files` → снова Run. Студия сама запустит нового демона
+   на выбранной Java; старый демон на Java 27 не используется и сам закроется через пару часов.
+3. Если ошибка «27» вернётся — перезапусти Android Studio (`File → Restart`) и снова Sync.
+   Крайний случай, который убивает все демоны гарантированно, — перезагрузка ПК.
+
+(Команда `gradlew --stop` из терминала тут не подойдёт: скриптов-обёрток `gradlew` в репозитории
+нет — их и jar в git не кладут, Android Studio скачивает Gradle сама. Кстати, в PowerShell
+локальные скрипты запускают с префиксом: `.\gradlew`.)
 
 **Ошибки вида `Unresolved reference 'material3'` в файлах `com.example.…`, `ui/theme/Theme.kt`**
 Это файлы другого проекта-шаблона, в которые скопирован код приложения. Так делать не нужно:
