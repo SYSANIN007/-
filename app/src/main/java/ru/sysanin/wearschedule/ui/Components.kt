@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
@@ -24,16 +25,17 @@ fun SectionCard(
     container: Color,
     modifier: Modifier = Modifier,
     borderColor: Color? = null,
+    borderWidth: Dp = 1.dp,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(18.dp))
             .background(container)
             .then(
                 if (borderColor != null) {
-                    Modifier.border(1.5.dp, borderColor, RoundedCornerShape(16.dp))
+                    Modifier.border(borderWidth, borderColor, RoundedCornerShape(18.dp))
                 } else {
                     Modifier
                 }
@@ -43,17 +45,4 @@ fun SectionCard(
     ) {
         content()
     }
-}
-
-/** Прозрачная карточка-секция (для «пар нет» и пр.). */
-@Composable
-fun Section(
-    modifier: Modifier = Modifier,
-    content: @Composable ColumnScope.() -> Unit,
-) {
-    SectionCard(
-        container = Color.Transparent,
-        modifier = modifier,
-        content = content,
-    )
 }

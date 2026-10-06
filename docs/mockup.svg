@@ -1,66 +1,113 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 640" font-family="Segoe UI, Roboto, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 700" font-family="Segoe UI, Roboto, Arial, sans-serif">
   <defs>
     <clipPath id="screen">
       <circle cx="280" cy="290" r="252"/>
     </clipPath>
     <path id="arcTop" d="M 55,290 A 225,225 0 0 1 505,290"/>
+    <!-- градиент героя «идёт сейчас» -->
+    <linearGradient id="heroGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7DC8FF" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#7DC8FF" stop-opacity="0.05"/>
+    </linearGradient>
+    <!-- градиент карточки текущей пары -->
+    <linearGradient id="nowGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7DC8FF" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#7DC8FF" stop-opacity="0.04"/>
+    </linearGradient>
   </defs>
 
   <!-- фон -->
-  <rect width="560" height="640" fill="#0b0c10"/>
+  <rect width="560" height="700" fill="#0b0c10"/>
 
   <!-- корпус часов -->
   <circle cx="280" cy="290" r="272" fill="#1b1e26"/>
   <circle cx="280" cy="290" r="272" fill="none" stroke="#2c303b" stroke-width="2"/>
   <circle cx="280" cy="290" r="252" fill="#000000"/>
 
-  <!-- изогнутая строка времени -->
-  <text font-size="20" letter-spacing="1.5" fill="#7EC8FF" font-weight="600">
-    <textPath href="#arcTop" startOffset="50%" text-anchor="middle">СР 7 ОКТ &#183; 10:24 &#183; НЕЧЁТ</textPath>
+  <!-- изогнутая строка времени — цвет = акцент недели (чёт = синий) -->
+  <text font-size="20" letter-spacing="1.5" fill="#7DC8FF" font-weight="600">
+    <textPath href="#arcTop" startOffset="50%" text-anchor="middle">СР 7 ОКТ &#183; 10:24 &#183; ЧЁТ</textPath>
   </text>
 
   <!-- контент экрана (обрезается по кругу) -->
   <g clip-path="url(#screen)">
 
-    <!-- карточка «сейчас» -->
+    <!-- шапка дня -->
     <g>
-      <rect x="110" y="115" width="340" height="84" rx="16" fill="#122033" stroke="#7EC8FF" stroke-width="2.5"/>
-      <text x="128" y="141" font-size="11" letter-spacing="2" fill="#9aa3b2">ИДЁТ СЕЙЧАС</text>
-      <text x="128" y="165" font-size="17" font-weight="700" fill="#7EC8FF">Разработка моб. приложений</text>
-      <text x="128" y="185" font-size="12.5" fill="#c7cedd">6-715 &#183; ещё 56 мин</text>
+      <rect x="110" y="92" width="340" height="64" rx="18" fill="#7DC8FF" fill-opacity="0.10" stroke="#7DC8FF" stroke-opacity="0.35" stroke-width="1"/>
+      <text x="128" y="118" font-size="19" font-weight="700" fill="#7DC8FF">Сегодня</text>
+      <circle cx="133" cy="138" r="3.5" fill="#7DC8FF"/>
+      <text x="143" y="142" font-size="12" fill="#9AA6BF">7 октября &#183; 6-я неделя &#183; чётная</text>
     </g>
 
-    <!-- текущая пара (подсвечена) -->
+    <!-- герой «идёт сейчас» с прогрессом пары -->
     <g>
-      <rect x="110" y="211" width="340" height="74" rx="16" fill="#122033" stroke="#7EC8FF" stroke-width="2.5"/>
-      <text x="128" y="238" font-size="16" font-weight="700" fill="#ffffff">10:00</text>
-      <text x="128" y="258" font-size="11" fill="#8b93a3">11:20</text>
-      <text x="196" y="240" font-size="13.5" font-weight="700" fill="#ffffff">Разработка моб. приложений</text>
-      <text x="196" y="262" font-size="11.5" fill="#a7b0c0">лек &#183; 6-715</text>
+      <rect x="110" y="164" width="340" height="106" rx="20" fill="url(#heroGrad)" stroke="#7DC8FF" stroke-width="2"/>
+      <text x="128" y="186" font-size="10.5" letter-spacing="1.5" fill="#9AA6BF">ИДЁТ СЕЙЧАС</text>
+      <text x="128" y="208" font-size="17" font-weight="700" fill="#7DC8FF">Разработка моб. приложений</text>
+      <text x="128" y="226" font-size="12" fill="#D9DEEA">пр &#183; 6-329 &#183; 2 п/г</text>
+      <rect x="128" y="240" width="240" height="5" rx="2.5" fill="#FFFFFF" fill-opacity="0.14"/>
+      <rect x="128" y="240" width="150" height="5" rx="2.5" fill="#7DC8FF"/>
+      <text x="378" y="246" font-size="11.5" font-weight="700" fill="#7DC8FF">ещё 45 мин</text>
     </g>
 
-    <!-- следующая пара -->
+    <!-- текущая пара в списке (рамка + градиент акцента) -->
     <g>
-      <rect x="110" y="297" width="340" height="74" rx="16" fill="#15181e" stroke="#2a2f3a" stroke-width="1.5"/>
-      <text x="128" y="324" font-size="16" font-weight="700" fill="#e8ebf2">11:30</text>
-      <text x="128" y="344" font-size="11" fill="#8b93a3">12:50</text>
-      <text x="196" y="326" font-size="13.5" font-weight="700" fill="#e8ebf2">Разработка моб. приложений</text>
-      <text x="196" y="348" font-size="11.5" fill="#a7b0c0">пр &#183; 6-329 &#183; 2 п/г</text>
+      <rect x="110" y="278" width="340" height="76" rx="18" fill="url(#nowGrad)" stroke="#7DC8FF" stroke-width="2"/>
+      <rect x="122" y="289" width="4" height="54" rx="2" fill="#5FD9A6"/>
+      <text x="136" y="308" font-size="15" font-weight="700" fill="#7DC8FF">10:00</text>
+      <text x="136" y="326" font-size="10.5" fill="#9AA6BF">11:20</text>
+      <text x="196" y="308" font-size="13" font-weight="700" fill="#ffffff">Разработка моб. приложений</text>
+      <text x="196" y="327" font-size="11">
+        <tspan fill="#9AA6BF">3-я</tspan><tspan fill="#FFFFFF" fill-opacity="0.3">&#160;&#160;&#183;&#160;&#160;</tspan><tspan fill="#5FD9A6" font-weight="700">пр</tspan><tspan fill="#FFFFFF" fill-opacity="0.3">&#160;&#160;&#183;&#160;&#160;</tspan><tspan fill="#E8ECF5">6-329</tspan><tspan fill="#FFFFFF" fill-opacity="0.3">&#160;&#160;&#183;&#160;&#160;</tspan><tspan fill="#9AA6BF">2 п/г</tspan>
+      </text>
+      <text x="196" y="346" font-size="11" font-weight="700" fill="#7DC8FF">ещё 45 мин</text>
     </g>
 
-    <!-- пара ниже видимого центра (уходит за край) -->
-    <g opacity="0.55">
-      <rect x="110" y="383" width="340" height="74" rx="16" fill="#15181e" stroke="#2a2f3a" stroke-width="1.5"/>
-      <text x="128" y="410" font-size="16" font-weight="700" fill="#e8ebf2">13:30</text>
-      <text x="128" y="430" font-size="11" fill="#8b93a3">14:50</text>
-      <text x="196" y="412" font-size="13.5" font-weight="700" fill="#e8ebf2">Разработка моб. приложений</text>
-      <text x="196" y="434" font-size="11.5" fill="#a7b0c0">пр &#183; 6-329 &#183; 2 п/г</text>
+    <!-- следующая пара (полупрозрачная рамка акцента) -->
+    <g>
+      <rect x="110" y="362" width="340" height="70" rx="18" fill="#141B2B" stroke="#7DC8FF" stroke-opacity="0.55" stroke-width="1.5"/>
+      <rect x="122" y="373" width="4" height="48" rx="2" fill="#7DC8FF"/>
+      <text x="136" y="392" font-size="15" font-weight="700" fill="#ffffff">11:30</text>
+      <text x="136" y="410" font-size="10.5" fill="#9AA6BF">12:50</text>
+      <text x="196" y="392" font-size="13" font-weight="700" fill="#ffffff">Теория вероятностей</text>
+      <text x="196" y="411" font-size="11">
+        <tspan fill="#9AA6BF">4-я</tspan><tspan fill="#FFFFFF" fill-opacity="0.3">&#160;&#160;&#183;&#160;&#160;</tspan><tspan fill="#7DC8FF" font-weight="700">лек</tspan><tspan fill="#FFFFFF" fill-opacity="0.3">&#160;&#160;&#183;&#160;&#160;</tspan><tspan fill="#E8ECF5">6-204</tspan>
+      </text>
+    </g>
+
+    <!-- обычная пара (уходит за край экрана) -->
+    <g opacity="0.75">
+      <rect x="110" y="440" width="340" height="70" rx="18" fill="#141B2B" stroke="#FFFFFF" stroke-opacity="0.09" stroke-width="1"/>
+      <rect x="122" y="451" width="4" height="48" rx="2" fill="#FFC46B"/>
+      <text x="136" y="470" font-size="15" font-weight="700" fill="#ffffff">13:30</text>
+      <text x="136" y="488" font-size="10.5" fill="#9AA6BF">14:50</text>
+      <text x="196" y="470" font-size="13" font-weight="700" fill="#ffffff">Разработка и защита БД</text>
+      <text x="196" y="489" font-size="11">
+        <tspan fill="#9AA6BF">5-я</tspan><tspan fill="#FFFFFF" fill-opacity="0.3">&#160;&#160;&#183;&#160;&#160;</tspan><tspan fill="#FFC46B" font-weight="700">лаб</tspan><tspan fill="#FFFFFF" fill-opacity="0.3">&#160;&#160;&#183;&#160;&#160;</tspan><tspan fill="#E8ECF5">6-305</tspan><tspan fill="#FFFFFF" fill-opacity="0.3">&#160;&#160;&#183;&#160;&#160;</tspan><tspan fill="#9AA6BF">1 п/г</tspan>
+      </text>
     </g>
 
     <!-- индикатор прокрутки -->
     <line x1="513" y1="250" x2="513" y2="330" stroke="#737b8c" stroke-width="5" stroke-linecap="round"/>
   </g>
 
+  <!-- легенда полосок -->
+  <g font-size="13">
+    <rect x="60" y="586" width="4" height="16" rx="2" fill="#7DC8FF"/>
+    <text x="72" y="599" fill="#9AA6BF">лекция</text>
+    <rect x="140" y="586" width="4" height="16" rx="2" fill="#5FD9A6"/>
+    <text x="152" y="599" fill="#9AA6BF">практика</text>
+    <rect x="238" y="586" width="4" height="16" rx="2" fill="#FFC46B"/>
+    <text x="250" y="599" fill="#9AA6BF">лабораторная</text>
+  </g>
+  <g font-size="13">
+    <circle cx="68" cy="622" r="4" fill="#7DC8FF"/>
+    <text x="80" y="626" fill="#9AA6BF">чётная неделя</text>
+    <circle cx="204" cy="622" r="4" fill="#C4ADFF"/>
+    <text x="216" y="626" fill="#9AA6BF">нечётная неделя</text>
+  </g>
+
   <!-- подписи-подсказки -->
-  <text x="280" y="600" font-size="14" fill="#9aa3b2" text-anchor="middle">свайп &#8592;&#8594; — следующий/предыдущий день&#160;&#160;&#183;&#160;&#160;скролл и безель — список пар&#160;&#160;&#183;&#160;&#160;тап — детали пары</text>
+  <text x="280" y="668" font-size="14" fill="#9aa3b2" text-anchor="middle">свайп &#8592;&#8594; — следующий/предыдущий день&#160;&#160;&#183;&#160;&#160;скролл и безель — список пар&#160;&#160;&#183;&#160;&#160;тап — детали пары</text>
 </svg>

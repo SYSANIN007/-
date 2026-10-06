@@ -114,7 +114,8 @@ app/src/main/
 │   └── ui/
 │       ├── ScheduleApp.kt            # Scaffold + пейджер дней + TimeText
 │       ├── DayPage.kt                # страница дня: шапка, «сейчас», список
-│       ├── LessonCard.kt             # карточка пары
+│       ├── LessonCard.kt             # карточка пары с полоской типа занятия
+│       ├── Palette.kt                # палитра: акценты недель и типов пар
 │       └── Components.kt             # общие компоненты
 └── res/                              # иконка, тема, строки
 ```

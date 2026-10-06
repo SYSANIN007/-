@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.wear.compose.foundation.CurvedTextStyle
 import androidx.wear.compose.foundation.lazy.ScalingLazyListState
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
-import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
@@ -93,9 +92,12 @@ fun ScheduleApp(
         positionIndicator = { PositionIndicator(scalingLazyListState = currentListState) },
         timeText = {
             val date = dates[currentPage]
+            // Цвет верхней строки — акцент текущей страницы:
+            // синий на чётной неделе, фиолетовый на нечётной.
+            val accent = Palette.parity(ScheduleLogic.parityOfDate(schedule, date))
             val leading = ScheduleLogic.timeTextLeading(date)
             val trailing = ScheduleLogic.parityShort(schedule, date)
-            val timeStyle = TimeTextDefaults.timeTextStyle(color = MaterialTheme.colors.primary)
+            val timeStyle = TimeTextDefaults.timeTextStyle(color = accent)
 
             TimeText(
                 modifier = Modifier.scrollAway(currentListState),
