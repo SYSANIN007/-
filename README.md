@@ -136,6 +136,17 @@ kotlinx.serialization, Jsoup. AGP 8.5, Gradle 8.9.
 Альтернатива: установить JDK 21 (например, [Eclipse Temurin](https://adoptium.net/)) и выбрать его
 в том же поле Gradle JVM. Проект работает и на Java 17, и на Java 21.
 
+**`java.lang.IllegalArgumentException: 27` (или 22/23/25…) сразу при запуске сборки, `CONFIGURE FAILED`**
+Gradle-демон работает на слишком новой Java (27 — сентябрь 2026), а Gradle 8.9 умеет максимум Java 21.
+Ошибка возникает ещё до компиляции кода приложения — с проектом всё в порядке. Лечится так:
+
+1. `File → Settings → Build, Execution, Deployment → Build Tools → Gradle` → поле **Gradle JVM** →
+   выбери Java **17 или 21** (например `jbr-21`). Если в списке нет — `Add JDK…` → папка
+   `C:\Program Files\Android\Android Studio\jbr` либо `Download JDK…` → версия 21.
+2. В терминале студии (View → Tool Windows → Terminal) выполни `gradlew --stop` —
+   это убьёт старый демон, который всё ещё сидит на Java 27.
+3. `File → Sync Project with Gradle Files` → снова Run.
+
 **Ошибки вида `Unresolved reference 'material3'` в файлах `com.example.…`, `ui/theme/Theme.kt`**
 Это файлы другого проекта-шаблона, в которые скопирован код приложения. Так делать не нужно:
 репозиторий — уже готовый проект. Открой через `File → Open` папку **с файлом `settings.gradle.kts`**
